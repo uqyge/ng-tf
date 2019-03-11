@@ -4,7 +4,7 @@
   </h1>
 
   <div>
-    <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+    <webcam [height]="224" [width]="224" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
       [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions"
       [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>
     <br />
@@ -13,14 +13,15 @@
   </div>
 </div>
 
-<div class="snapshot" *ngIf="webcamImage">
-  <h2>Nice one!</h2>
-  <img [src]="webcamImage.imageAsDataUrl" />
-</div>
-
 <h4 *ngIf="errors.length > 0">Messages:</h4>
 <ul *ngFor="let error of errors">
   <li>{{error | json}}</li>
 </ul>
-<img id='mnist_6' src='../../assets/cat.jpg' width=224 height=224 />
-<app-mnet></app-mnet>
+<img id='cat' src='../../assets/facec.jpg' width=224 height=224 />
+<img id='face' src='../../assets/face.jpg' width=224 height=224 />
+<img id='dog' src='../../assets/stop2.jpg' width=224 height=224 />
+<img id='stop' src='../../assets/stop.jpg' width=224 height=224 />
+<app-mnet [imgW]="webcamImage"></app-mnet>
+<!-- <div>
+  <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+</div> -->

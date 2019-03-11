@@ -1,4 +1,7 @@
 <p>
   mnet works!
 </p>
-<button class="actionBtn" (click)="predict(this.m7);">mnist predict</button>
+<button class="actionBtn" (click)="train();">train</button>
+<br />
+<img id='cam' [src]=imgW.imageAsDataUrl width=224 height=224 />
+<button class="actionBtn" (click)="predict();">predict</button>
