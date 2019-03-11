@@ -1,7 +1,6 @@
 <div style="text-align:center">
   <h1>
-    Ngx-Webcam Demo
-  </h1>
+    Show me your hand and I will give you a cat. </h1>
 
   <div>
     <webcam [height]="224" [width]="224" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
@@ -17,10 +16,10 @@
 <ul *ngFor="let error of errors">
   <li>{{error | json}}</li>
 </ul>
-<img id='cat' src='../../assets/facec.jpg' width=224 height=224 />
-<img id='face' src='../../assets/face.jpg' width=224 height=224 />
-<img id='dog' src='../../assets/stop2.jpg' width=224 height=224 />
-<img id='stop' src='../../assets/stop.jpg' width=224 height=224 />
+<img style="display: none;" id='face1' src='../../assets/facec.jpg' width=224 height=224 />
+<img id='face2' src='../../assets/face.jpg' width=224 height=224 />
+<img style="display: none;" id='stop1' src='../../assets/stop2.jpg' width=224 height=224 />
+<img id='stop2' src='../../assets/stop.jpg' width=224 height=224 />
 <app-mnet [imgW]="webcamImage"></app-mnet>
 <!-- <div>
   <video autoplay playsinline muted id="webcam" width="224" height="224"></video>

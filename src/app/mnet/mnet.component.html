@@ -1,7 +1,10 @@
-<p>
-  mnet works!
-</p>
 <button class="actionBtn" (click)="train();">train</button>
 <br />
 <img id='cam' [src]=imgW.imageAsDataUrl width=224 height=224 />
+<br />
 <button class="actionBtn" (click)="predict();">predict</button>
+<div *ngIf="showCat">
+  <!-- <p>this is 1</p> -->
+  <p>congradulations! you find a cat.</p>
+  <img src='../../assets/cat.jpg' width=224 height=224 />
+</div>

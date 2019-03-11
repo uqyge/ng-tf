@@ -21,21 +21,28 @@ export class MnetComponent implements OnInit {
   constructor() {}
   truncatedMnet: tf.LayersModel;
   model: tf.LayersModel;
-
-  catImg = document.getElementById("cat") as HTMLImageElement;
-  dogImg = document.getElementById("dog") as HTMLImageElement;
-  imgC = tf.browser
-    .fromPixels(this.catImg)
-    .toFloat()
-    .expandDims(0);
-  imgD = tf.browser
-    .fromPixels(this.dogImg)
+  showCat: boolean = false;
+  face1Img = document.getElementById("face1") as HTMLImageElement;
+  imgF1 = tf.browser
+    .fromPixels(this.face1Img)
     .toFloat()
     .expandDims(0);
 
-  stopImg = document.getElementById("stop") as HTMLImageElement;
-  imgS = tf.browser
+  face2Img = document.getElementById("face2") as HTMLImageElement;
+  imgF2 = tf.browser
+    .fromPixels(this.face2Img)
+    .toFloat()
+    .expandDims(0);
+
+  stopImg = document.getElementById("stop1") as HTMLImageElement;
+  imgS1 = tf.browser
     .fromPixels(this.stopImg)
+    .toFloat()
+    .expandDims(0);
+
+  stop2Img = document.getElementById("stop2") as HTMLImageElement;
+  imgS2 = tf.browser
+    .fromPixels(this.stop2Img)
     .toFloat()
     .expandDims(0);
 
@@ -60,9 +67,10 @@ export class MnetComponent implements OnInit {
 
   async train() {
     tf.tidy(() => {
-      controllerDataset.addExample(this.truncatedMnet.predict(this.imgC), 0);
-      controllerDataset.addExample(this.truncatedMnet.predict(this.imgD), 1);
-      controllerDataset.addExample(this.truncatedMnet.predict(this.imgS), 1);
+      controllerDataset.addExample(this.truncatedMnet.predict(this.imgF1), 0);
+      controllerDataset.addExample(this.truncatedMnet.predict(this.imgF2), 0);
+      controllerDataset.addExample(this.truncatedMnet.predict(this.imgS1), 1);
+      controllerDataset.addExample(this.truncatedMnet.predict(this.imgS2), 1);
     });
     if (controllerDataset.xs == null) {
       throw new Error("Add some examples before training!");
@@ -127,8 +135,8 @@ export class MnetComponent implements OnInit {
   }
 
   async predict() {
-    // while (true) {
-    {
+    while (true) {
+      // {
       const predictedClass = tf.tidy(() => {
         // Capture the frame from the webcam.
         // Make a prediction through mobilenet, getting the internal activation of
@@ -154,6 +162,12 @@ export class MnetComponent implements OnInit {
       const classId = (await predictedClass.data())[0];
       predictedClass.dispose();
       console.log(classId);
+      if (classId > 0) {
+        this.showCat = true;
+      } else if (classId == 0) {
+        this.showCat = false;
+      }
+
       // ui.predictClass(classId);
       // await tf.nextFrame();
     }
