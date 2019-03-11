@@ -4,6 +4,7 @@ import { WebcamImage } from "./modules/webcam/domain/webcam-image";
 import { WebcamUtil } from "./modules/webcam/util/webcam.util";
 import { WebcamInitError } from "./modules/webcam/domain/webcam-init-error";
 
+import * as tf from "@tensorflow/tfjs";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
